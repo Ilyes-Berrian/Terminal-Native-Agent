@@ -1,32 +1,88 @@
-calculator v0.1.0
-└── pyside6 v6.11.2
-    ├── pyside6-addons v6.11.2
-    │   ├── pyside6-essentials v6.11.2
-    │   │   └── shiboken6 v6.11.2
-    │   └── shiboken6 v6.11.2
-    ├── pyside6-essentials v6.11.2 (*)
-    └── shiboken6 v6.11.2
-agents-prac02 v0.1.0
-├── openai v3.13.0
-│   ├── anyio v4.15.1
-│   │   ├── idna v3.19
-│   │   └── typing-extensions v4.16.0
-│   ├── httpx2 v2.12.0
-│   │   ├── anyio v4.15.1 (*)
-│   │   ├── httpcore2 v2.12.0
-│   │   │   ├── h11 v0.16.0
-│   │   │   └── truststore v0.10.4
-│   │   ├── idna v3.19
-│   │   └── truststore v0.10.4
-│   ├── jiter v0.16.0
-│   ├── pydantic v2.13.5
-│   │   ├── annotated-types v0.8.0
-│   │   ├── pydantic-core v2.46.5
-│   │   │   └── typing-extensions v4.16.0
-│   │   ├── typing-extensions v4.16.0
-│   │   └── typing-inspection v0.4.4
-│   │       └── typing-extensions v4.16.0
-│   ├── sniffio v1.3.1
-│   └── typing-extensions v4.16.0
-└── python-dotenv v1.2.3
-(*) Package tree already displayed
+# TerminalNativeAgent
+
+TerminalNativeAgent is a lightweight, pure-Python AI coding agent designed to run directly in the terminal. It gives an LLM access to a small set of tools so it can inspect files, read and write code, and execute shell commands after user approval.
+
+This project is a practical foundation for building more advanced agentic systems, from local terminal automation to framework-based workflows such as LangChain or other orchestration layers.
+
+## What this project does
+
+- Runs an AI agent in the terminal
+- Uses tool calling to perform actions like:
+  - listing directories
+  - reading files
+  - writing files
+  - running shell commands
+- Keeps the implementation simple and easy to extend
+- Demonstrates how a coding agent can work with the local filesystem and command line
+
+## Why this project exists
+
+The goal is to explore the core ideas behind AI agents in a minimal, understandable way before moving to larger frameworks. Instead of relying on a heavy abstraction layer, this project shows the underlying pattern:
+
+- the model receives a prompt
+- it decides whether to call a tool
+- the tool executes in the local environment
+- the result is sent back to the model
+- the agent continues or repeat the workflow until it acheive the goal
+
+## Project structure
+
+- `src/agent.py` — main application loop and agent orchestration
+- `src/tools.py` — tool implementations
+- `src/tools_config.py` — tool schemas exposed to the model
+- `.env` — environment variables for the model and API_TOKEN access
+
+## Requirements
+
+- Python 3.14+
+- `uv` package manager: curl -LsSf https://astral.sh/uv/install.sh | sh
+- An API token for a model provider such as Hugging Face
+
+## Quick start
+
+1. Install dependencies
+
+```bash
+uv sync
+```
+
+2. Create a `.env` file in the project root with the following values:
+
+```env
+HF_TOKEN=your_huggingface_token
+MODEL=Qwen/Qwen3.8-27B:ovhcloud
+```
+
+3. Run the agent
+
+```bash
+uv run ./src/agent.py
+```
+
+4. Start chatting in the terminal.
+
+Example:
+
+```text
+👨 User: List the project files
+```
+
+The agent will decide whether to use a tool and then continue the task.
+
+## Important note
+
+This project can interact with your filesystem and shell. Some actions may modify files or execute commands. Always approve commands before running them when the agent asks for permission.
+
+## Future direction
+
+This repository is meant to be a clean foundation for building more advanced agentic systems. You can extend it with:
+
+- stronger memory and conversation history
+- structured tool execution
+- better safety checks
+- framework integrations such as LangChain or LangGraph
+- multi-agent patterns
+
+## License
+
+This project is currently for learning and experimentation.
