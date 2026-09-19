@@ -1,4 +1,4 @@
-# TerminalNativeAgent
+# Terminal-Native-Agent
 
 TerminalNativeAgent is a lightweight, pure-Python AI coding agent designed to run directly in the terminal. It gives an LLM access to a small set of tools so it can inspect files, read and write code, and execute shell commands after user approval.
 
