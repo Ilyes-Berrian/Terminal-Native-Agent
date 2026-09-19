@@ -50,7 +50,7 @@ uv sync
 
 ```env
 HF_TOKEN=your_huggingface_token
-MODEL=Qwen/Qwen3.8-27B:ovhcloud
+MODEL=LLM_URL, e.g Hugging Face
 ```
 
 3. Run the agent
