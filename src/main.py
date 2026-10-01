@@ -7,8 +7,8 @@ from tools_config import TOOL_SCHEMAS
 load_dotenv()
 
 client = OpenAI(
-    base_url="https://router.huggingface.co/v1",
-    api_key=os.environ["HF_TOKEN"],
+    base_url=os.environ["BASE_URL"],
+    api_key=os.environ["API_TOKEN"],
 )
 
 SYSTEM_PROMPT = """You are a coding agent running in the user's terminal.
